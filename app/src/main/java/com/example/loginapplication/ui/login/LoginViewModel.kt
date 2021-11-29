@@ -2,48 +2,42 @@ package com.example.loginapplication.ui.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import android.util.Patterns
 import androidx.lifecycle.viewModelScope
 import com.example.data.LoginRepo
-import com.example.loginapplication.data.LoginRepository
-import com.example.loginapplication.data.Result
+import com.example.domain.LoginUserUseCase
+import com.example.domain.SafeResult
 
 import com.example.loginapplication.R
 import com.example.loginapplication.ui.Base.BaseViewModel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(
-    private val userRepo: LoginRepo
+    private val userRepo: LoginRepo,
+    private val loginUserUseCase: LoginUserUseCase
 ) : BaseViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
 
-    private val _loginResult = MutableLiveData<LoginResult>()
-    val loginResult: LiveData<LoginResult> = _loginResult
+    private val _loginResult = MutableLiveData<SafeResult>()
+    val loginResult: LiveData<SafeResult> = _loginResult
 
-     fun login(username: String, password: String) {
+     fun login(username: String, password: String,conPassword:String?=null) {
          viewModelScope.launch {
-             userRepo.getLLoginLocalUser()
+             _loginResult.value= loginUserUseCase.loginUser(username,password,conPassword)
 
          }
-      /*  // can be launched in a separate asynchronous job
-        val result = loginRepository.login(username, password)
 
-        if (result is Result.Success) {
-            _loginResult.value =
-                LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
-        } else {
-            _loginResult.value = LoginResult(error = R.string.login_failed)
-        }*/
+
     }
 
     fun loginDataChanged(username: String, password: String) {
         if (!isUserNameValid(username)) {
-            _loginForm.value = LoginFormState(usernameError = R.string.invalid_username)
+            _loginForm.value = LoginFormState(
+                usernameError = R.string.invalid_username
+            )
         } else if (!isPasswordValid(password)) {
             _loginForm.value = LoginFormState(passwordError = R.string.invalid_password)
         } else {

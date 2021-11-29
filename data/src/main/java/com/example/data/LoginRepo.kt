@@ -5,7 +5,7 @@ import com.example.data.local.entities.LoginEntity
     private val localSource: LoginLocalSource,
 ) {
     suspend fun getLLoginLocalUser(): List<LoginEntity> {
-        return localSource.getLoginUser()
+        return localSource.getLoginUsers()
     }
 
     suspend fun saveLoginUser(user: LoginEntity) {
@@ -15,7 +15,8 @@ import com.example.data.local.entities.LoginEntity
 }
 
 interface LoginLocalSource {
-    suspend fun getLoginUser(): List<LoginEntity>
+    suspend fun getLoginUsers(): List<LoginEntity>
+    suspend fun getLoginUser(userName:String,password:String):LoginEntity?
     suspend fun saveLoginUser(user:LoginEntity)
 
 }

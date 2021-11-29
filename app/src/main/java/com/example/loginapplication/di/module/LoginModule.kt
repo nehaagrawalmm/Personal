@@ -4,6 +4,7 @@ import com.example.data.LoginLocalSource
 import com.example.data.LoginRepo
 import com.example.data.local.LoginDB
 import com.example.data.local.sources.LoginLocalSourceImpl
+import com.example.domain.LoginUserUseCase
 import com.example.loginapplication.data.LoginRepository
 import dagger.Module
 import dagger.Provides
@@ -23,6 +24,12 @@ class LoginModule {
     @Singleton
     internal fun provideUserRepo( userLocalSource: LoginLocalSource): LoginRepo {
         return LoginRepo( userLocalSource)
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideLoginUserUseCase( userLocalSource: LoginLocalSource): LoginUserUseCase {
+        return LoginUserUseCase( userLocalSource)
     }
 
 

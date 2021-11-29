@@ -12,10 +12,12 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.Toast
+import com.example.domain.SafeResult
 import com.example.loginapplication.databinding.ActivityLoginBinding
 
 import com.example.loginapplication.R
 import com.example.loginapplication.ui.Base.BaseActivity
+import com.example.loginapplication.ui.employee.EmployeeActivity
 
 class LoginActivity :BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
@@ -24,15 +26,6 @@ class LoginActivity :BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         setObservers()
     }
 
-    private fun updateUiWithUser(model: LoggedInUserView) {
-        val welcome = getString(R.string.welcome)
-        val displayName = model.displayName
-        Toast.makeText(
-            applicationContext,
-            "$welcome $displayName",
-            Toast.LENGTH_LONG
-        ).show()
-    }
 
     private fun showLoginFailed(@StringRes errorString: Int) {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
@@ -66,16 +59,12 @@ class LoginActivity :BaseActivity<ActivityLoginBinding, LoginViewModel>() {
             val loginResult = it ?: return@Observer
 
             _binding?.loading!!.visibility = View.GONE
-            if (loginResult.error != null) {
-                showLoginFailed(loginResult.error)
+            if (loginResult is SafeResult.Failure) {
+             //   showLoginFailed("Log In Failed")
+            }else{
+                EmployeeActivity.launch(this)
             }
-            if (loginResult.success != null) {
-                updateUiWithUser(loginResult.success)
-            }
-            setResult(Activity.RESULT_OK)
 
-            //Complete and destroy login activity once successful
-            // finish()
         })
 
         _binding?.let {_bind->
@@ -109,9 +98,17 @@ class LoginActivity :BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
                 _bind.login.setOnClickListener {
                     _bind.loading.visibility = View.VISIBLE
-                viewModel.login(_bind.username.text.toString(), _bind.password.text.toString())
+                viewModel.login(_bind.username.text.toString(), _bind.password.text.toString(),_bind.conPassword.text.toString())
             }
         }
+        }
+
+        _binding?.let { _bind->
+            _bind.addUser.setOnClickListener {
+                _bind.conPassword.visibility=View.VISIBLE
+                _bind.addUser.isEnabled=false
+            }
+
         }
     }
 

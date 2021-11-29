@@ -6,7 +6,7 @@ import com.example.data.local.dao.User
 
 @Entity
 data class LoginEntity(
-    @PrimaryKey val userId: String,
+@PrimaryKey(autoGenerate = true) val userId: Int=0,
     val email: String?,
     val password: String?,
     val userName: String?,

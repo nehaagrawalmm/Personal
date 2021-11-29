@@ -9,7 +9,7 @@ import kotlinx.android.parcel.Parcelize
 @JsonClass(generateAdapter = true)
 @Parcelize
 data class User(
-    val uid: String = "",
+    val uid: Int = -1,
     val name: String? = null,
     val email: String? = null,
     val password: String? = null,

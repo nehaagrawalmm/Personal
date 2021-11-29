@@ -17,16 +17,24 @@ class LoginLocalSourceImpl(
 
 
 
-  override suspend fun getLoginUser(): List<LoginEntity> {
+  override suspend fun getLoginUsers(): List<LoginEntity> {
     return withContext(executionContext) {
       db.loginDao().getLoginUsers()
     }
   }
 
+  override suspend fun getLoginUser(
+    userName: String,
+    password: String
+  ): LoginEntity? {
+   return withContext(executionContext) {
+      db.loginDao().getLoginUser(userName,password)
+    }  }
+
 
   override suspend fun saveLoginUser(user: LoginEntity) {
     withContext(executionContext) {
-      db.loginDao().insertAll(user.toEntity())
+      db.loginDao().insertLoginUser(user.toEntity())
     }
   }
 
