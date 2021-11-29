@@ -1,6 +1,8 @@
 package com.example.data.remote
 
 import android.os.Parcelable
+import com.example.data.local.dao.User
+import com.example.data.local.entities.LoginEntity
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
@@ -15,10 +17,10 @@ data class Employee(
     val jobTitleName: String? = null,
 
     @Json(name = "firstName")
-    val firstName: String? = null,
+    val firstName: String= "",
 
     @Json(name = "lastName")
-    val lastName: String? = null,
+    val lastName: String = "",
 
     @Json(name = "preferredFullName")
     val preferredFullName: String? = null,
@@ -30,6 +32,13 @@ data class Employee(
     val region: String? = null,
 
     @Json(name = "emailAddress")
-    val emailAddress: String? = null,
+    val emailAddress: String = "",
 ) : Parcelable
+
+
+fun Employee.toDomain(): com.domain.model.Employee {
+    return com.domain.model.Employee(
+        email=this.emailAddress,
+        firstName=this.firstName,
+         lastName= this.lastName)}
 

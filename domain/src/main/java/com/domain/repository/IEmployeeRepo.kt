@@ -1,4 +1,9 @@
 package com.domain.repository
 
-class IEmployeeRepo {
+import com.domain.model.Employee
+import com.domain.usecase.SafeResult
+
+interface IEmployeeRepo {
+    suspend fun getEmployeeList(): SafeResult<List<Employee>>
+
 }
