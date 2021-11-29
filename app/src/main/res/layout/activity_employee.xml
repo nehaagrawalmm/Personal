@@ -22,6 +22,18 @@
         tools:context=".ui.login.LoginActivity">
 
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_teammates"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:listitem="@layout/item_teammate"
+            tools:itemCount="3"/>
+
+
+
         <ProgressBar
             android:id="@+id/loading"
             android:layout_width="wrap_content"

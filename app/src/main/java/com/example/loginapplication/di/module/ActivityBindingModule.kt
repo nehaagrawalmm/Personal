@@ -2,9 +2,9 @@ package com.example.loginapplication.di.module
 
 
 import com.example.loginapplication.di.qualifiers.ActivityScope
+import com.example.loginapplication.ui.employee.EmployeeActivity
 import com.example.loginapplication.ui.login.LoginActivity
 import dagger.Module
-import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 
 /**
@@ -18,6 +18,10 @@ abstract class ActivityBindingModule {
   @ActivityScope
   @ContributesAndroidInjector
   abstract fun bindLoginActivity(): LoginActivity
+
+  @ActivityScope
+  @ContributesAndroidInjector
+  abstract fun bindEmployeeActivity(): EmployeeActivity
 
 
 }

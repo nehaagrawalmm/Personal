@@ -1,4 +1,4 @@
-package com.example.domain
+package com.example.usecase
 
 import org.junit.Test
 
