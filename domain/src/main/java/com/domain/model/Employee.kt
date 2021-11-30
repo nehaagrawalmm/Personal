@@ -12,14 +12,14 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class EmpResponse(
     @field:Json(name = "Employees")
-    val data: List<Employee>
+    val Employees: List<Employee>
 ):Parcelable
 
 @JsonClass(generateAdapter = true)
 @Parcelize
 data class Employee(
     @field:Json(name = "userId")
-    val userId: Int = -1,
+    val userId: String = "",
     @field:Json(name = "jobTitleName")
     val jobTitleName: String? = null,
 
@@ -34,7 +34,7 @@ data class Employee(
 
     val employeeCode: String? = null,
 
-    @Json(name = "preferredFullName")
+    @Json(name = "phoneNumber")
     val phoneNumber: String? = null,
     val region: String? = null,
 

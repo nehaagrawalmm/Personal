@@ -30,7 +30,6 @@ object RetrofitHelper {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(okHttpClient)
-            .addCallAdapterFactory(moshi.)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
     }
