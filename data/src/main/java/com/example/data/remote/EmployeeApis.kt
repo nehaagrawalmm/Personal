@@ -1,5 +1,8 @@
 package com.example.data.remote
 
+
+import com.domain.model.EmpResponse
+import com.domain.model.Employee
 import retrofit2.Retrofit
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -7,9 +10,7 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Query
 
-/**
- * Created by Saurabh Mishra on 15/09/20
- */
+
 interface EmployeeApis {
 
   companion object {
@@ -18,7 +19,9 @@ interface EmployeeApis {
     }
   }
 
-  @GET("employees/getempleoeelist")
-  suspend fun getEmployees(): List<Employee>
+
+
+  @GET("/employees/getempleoeelist")
+  suspend fun getEmployees(): EmpResponse
 
 }

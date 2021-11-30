@@ -1,7 +1,6 @@
 package com.example.loginapplication.ui.employee
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.domain.model.Employee

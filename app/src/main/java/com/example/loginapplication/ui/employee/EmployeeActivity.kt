@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.domain.model.Employee
 import com.example.loginapplication.R
 import com.example.loginapplication.databinding.ActivityEmployeeBinding
-import com.example.loginapplication.databinding.ActivityLoginBinding
 import com.example.loginapplication.ui.Base.BaseActivity
 
 class EmployeeActivity: BaseActivity<ActivityEmployeeBinding, EmployeeViewModel>() {

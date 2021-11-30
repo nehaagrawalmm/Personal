@@ -1,7 +1,6 @@
 package com.example.loginapplication.ui.employee
 
 import com.domain.model.Employee
-import com.example.data.local.dao.User
 
 sealed class EmployeeViewState {
 class Loading(val show: Boolean) : EmployeeViewState()

@@ -1,10 +1,9 @@
 package com.example.data
 
-import com.domain.model.LoginUser
+import com.domain.model.Employee
 import com.domain.repository.ILoginRepo
 import com.domain.usecase.SafeResult
 import com.example.data.local.entities.LoginEntity
-import com.example.data.remote.Employee
 import javax.inject.Inject
 
 class LoginRepoImp @Inject constructor(
@@ -45,8 +44,4 @@ interface LoginLocalSource {
 }
 
 
-interface LoginNetworkSource {
-    suspend fun getEmployees(): SafeResult<Employee>
-
-}
 

@@ -1,5 +1,6 @@
 package com.example.loginapplication.ui.employee
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -25,6 +26,7 @@ class EmployeeViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             val result=employeeUseCase.getEmployeeList().getSuccessOrNull()
+            Log.d("neha ",result.toString())
             if(result!=null){
                 _viewState.value= EmployeeViewState.Employees(result)
             }
